@@ -77,10 +77,11 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="logo">IT</div>
+      <div class="logo">LC</div>
       <div>
         <h1>Loven Costa</h1>
-        <p class="lead">Linux System Admin | Cloud Ops | SRE | Automation | Cybersecurity | Open Source Consulting</p>
+        <p class="lead">🔧 Linux System Administration | ☁️ Cloud Operations | 🛠️ Site Reliability Engineering (SRE) <br>
+⚙️ Automation & Scripting | 🔐 Cybersecurity Best Practices | 🌐 Open Source Consulting</p>
       </div>
     </header>
 
@@ -101,7 +102,7 @@
 
     <main id="sections"></main>
 
-    <footer>Tip: keep descriptions short (2–4 bullets), attach one concise case study PDF per section and 1-2 demo videos. Add timestamps on projects for recruiter context.</footer>
+    <footer></footer>
   </div>
 
   <!-- Content data: edit this JSON to maintain the site. Keep assets in /assets/ and push to GitHub. -->
@@ -115,7 +116,7 @@
         "title":"Linux System Administration",
         "subtitle":"Systems, networking, performance tuning, automation",
         "summary":["5+ years maintaining mixed Ubuntu/RHEL fleets","Config management with Ansible","Monitoring with Prometheus + Grafana"],
-        "tags":["Linux","Bash","Systemd","Ansible","Monit","Nagios","Prometheus","Grafana","SSH","Networking"],
+        "tags":["Linux","UBUNTU","RHEL 9","Patch Management","HA Cluster (Corosync)","SHELL Scripting","Bash","Systemd","Ansible","Monit","Nagios","Prometheus","Grafana","SSH","Networking","logrotate"],
         "media":[
           {"type":"image","src":"assets/linux-console.gif","caption":"Automated patch run"},
           {"type":"pdf","src":"assets/case-linux.pdf","caption":"Case study: migration to Debian 11"},
@@ -127,7 +128,7 @@
         "title":"Cloud Administration",
         "subtitle":"AWS driven IaaS/PaaS operations and cost management",
         "summary":["Design & operate AWS accounts","IaC with Terraform","Cost optimization & tagging"],
-        "tags":["AWS","EC2","S3","VPC","Terraform","CloudWatch","IAM"],
+        "tags":["AWS","EC2","S3","VPC","Terraform","CloudWatch","Azure","Azure AAD","VNet","RBAC","Azure Blob Storage","runbooks","IAM","s3 backup","rsync"],
         "media":[
           {"type":"image","src":"assets/aws-architecture.png","caption":"Well-architected landing zone"},
           {"type":"youtube","src":"https://www.youtube.com/embed/ysz5S6PUM-U","caption":"Demo: Terraform modules"}
@@ -138,7 +139,7 @@
         "title":"Site Reliability Engineering",
         "subtitle":"SLO/SLI/Incident response and automation",
         "summary":["SLO design and tracking","Incident playbooks and postmortems","Chaos experiments with Litmus"],
-        "tags":["SRE","SLO","Prometheus","Alerting","PagerDuty","Kubernetes","Chaos"],
+        "tags":["SRE","Observability","SLO","SLI","Prometheus","Alerting","Kubernetes","Application Insight","Log Analytics","ELK","M/Monit","Nagios","Azure Monitor","syslogd"],
         "media":[{"type":"pdf","src":"assets/sre-postmortem.pdf","caption":"Postmortem example"}]
       },
       {
@@ -146,7 +147,7 @@
         "title":"DevOps",
         "subtitle":"CI/CD, pipelines and developer platforms",
         "summary":["GitOps patterns","CI with GitHub Actions","Docker build pipelines"],
-        "tags":["CI/CD","GitHub Actions","Docker","Helm","ArgoCD"],
+        "tags":["CI/CD","Git","Docker","Helm","Kubernetes","Ansible","IaC","Azure DevOps","LXC","ARM Template","runbooks"],
         "media":[{"type":"youtube","src":"https://www.youtube.com/embed/oHg5SJYRHA0","caption":"Pipeline walkthrough"}]
       },
       {
@@ -154,7 +155,7 @@
         "title":"Database Administration",
         "subtitle":"RDBMS & NoSQL operations, backups and tuning",
         "summary":["MySQL tuning and HA","Postgres replication","MongoDB ops"],
-        "tags":["Postgres","MySQL","MongoDB","Backups","Replication","HA"],
+        "tags":["Postgres","MySQL","Microsoft SQL","MongoDB","Backups","Replication","HA","ETL"],
         "media":[{"type":"image","src":"assets/db-graph.png","caption":"Query optimization results"}]
       },
       {
@@ -170,7 +171,7 @@
         "title":"Penetration Testing / Ethical Hacking",
         "subtitle":"Vulnerability assessments and red-team exercises",
         "summary":["Network & web app pentests","OWASP Top 10","Secure config recommendations"],
-        "tags":["PenTest","Burp","nmap","Metasploit","OWASP"],
+        "tags":["PenTest","Burp","nmap","Metasploit","OWASP","john the ripper","nmap","shodan","hashcat","sqlmap","Metasploit","Nikto","Gobuster/Dirbuster","Wireshark","aircrack-ng","THC-Hydra", "ExploitDB"],
         "media":[{"type":"image","src":"assets/security-scan.png","caption":"Scan report snapshot"}]
       },
       {
@@ -178,7 +179,7 @@
         "title":"System Automation & Orchestration",
         "subtitle":"Workflows, event-driven ops and runbooks",
         "summary":["Event-driven automation with AWS Lambda","Orchestration with Ansible Tower","Self-healing scripts"],
-        "tags":["Automation","Lambda","Ansible","Runbooks","EventBridge"],
+        "tags":["Automation","Lambda","Ansible","Runbooks","EventBridge","runbooks","IaC"],
         "media":[{"type":"youtube","src":"https://www.youtube.com/embed/3fumBcKC6RE","caption":"Automation demo"}]
       },
       {
