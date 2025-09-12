@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IT Portfolio — Single Page</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="IT portfolio showcasing Linux, Cloud, SRE, DevOps, DBA, Security, Automation, and Open Source consulting skills." />
+
+  <style>
+    :root{
+      --aws-orange:#FF9900;
+      --aws-dark:#232F3E; /* deep navy */
+      --muted:#657786;
+      --bg:#F6F8FA;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.6);
+      --accent:#0A66C2;
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#0b1720}
+
+    .wrap{max-width:1100px;margin:28px auto;padding:28px}
+
+    header{display:flex;gap:18px;align-items:center}
+    .logo{width:68px;height:68px;background:linear-gradient(135deg,var(--aws-orange),#FFB84D);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--aws-dark);font-weight:800;font-size:22px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:4px 0 0;color:var(--muted)}
+
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--aws-orange);color:#111;border:none;padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06)}
+    .search{padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);min-width:280px}
+
+    main{margin-top:20px}
+
+    /* tag cloud */
+    .tag-cloud{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 22px}
+    .tag{background:var(--card);padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);font-size:13px;cursor:pointer}
+
+    /* sections */
+    .section-card{background:var(--card);border-radius:var(--radius);padding:14px;margin-bottom:14px;box-shadow:0 6px 18px rgba(35,47,62,0.06);border-left:6px solid var(--aws-orange)}
+    details{border-radius:10px}
+    summary{display:flex;align-items:center;gap:12px;list-style:none;cursor:pointer;padding:8px 4px}
+    .section-title{font-weight:700}
+    .meta{font-size:13px;color:var(--muted)}
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+    .content-area{padding:12px 6px 4px}
+    .media-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .media{min-width:220px;max-width:360px;background:linear-gradient(180deg, #fff, #fbfbfb);padding:6px;border-radius:10px;border:1px solid rgba(0,0,0,0.04)}
+    .media img{width:100%;display:block;border-radius:8px}
+    .media .caption{font-size:13px;color:var(--muted);padding:6px}
+
+    /* pdf embed preview */
+    .pdf-link{display:block;padding:8px;border-radius:8px;background:#f4f6f8;border:1px solid rgba(0,0,0,0.03);text-decoration:none;color:var(--aws-dark);font-weight:600}
+
+    /* small screens */
+    @media (max-width:720px){.wrap{padding:16px}.search{min-width:120px}}
+
+    /* tag size scale for cloud - JS will set data-size */
+    .tag[data-size]{font-size:calc(12px + var(--size,0) * 2px)}
+
+    /* micro details */
+    .contact{margin-top:18px;display:flex;gap:12px;align-items:center}
+    .resume{padding:8px 10px;border-radius:10px;background:var(--aws-dark);color:#fff;text-decoration:none;font-weight:700}
+
+    footer{margin-top:28px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">IT</div>
+      <div>
+        <h1>Full-stack IT Portfolio</h1>
+        <p class="lead">One-page, recruiter-friendly view of skills & experience — collapsible sections, embedded media, tag clouds.</p>
+      </div>
+    </header>
+
+    <div class="topbar">
+      <div class="controls">
+        <input class="search" id="searchInput" placeholder="Search skills, tools or sections..." />
+        <button class="btn" id="clearBtn">Clear</button>
+        <button class="btn ghost" id="expandAll">Expand all</button>
+      </div>
+      <div class="contact">
+        <a class="resume" href="#" id="resumeLink">Download Resume</a>
+        <a href="mailto:you@example.com" class="btn">Contact</a>
+      </div>
+    </div>
+
+    <!-- Global Tag cloud generated from content -->
+    <div id="globalTags" class="tag-cloud" aria-hidden="false"></div>
+
+    <main id="sections"></main>
+
+    <footer>Tip: keep descriptions short (2–4 bullets), attach one concise case study PDF per section and 1-2 demo videos. Add timestamps on projects for recruiter context.</footer>
+  </div>
+
+  <!-- Content data: edit this JSON to maintain the site. Keep assets in /assets/ and push to GitHub. -->
+  <script type="application/json" id="site-data">
+  {
+    "name":"Your Name",
+    "resume":"assets/Resume.pdf",
+    "sections":[
+      {
+        "id":"linux",
+        "title":"Linux System Administration",
+        "subtitle":"Systems, networking, performance tuning, automation",
+        "summary":["5+ years maintaining mixed Debian/RHEL fleets","Config management with Ansible","Monitoring with Prometheus + Grafana"],
+        "tags":["Linux","Bash","Systemd","Ansible","Prometheus","Grafana","SSH","Networking"],
+        "media":[
+          {"type":"image","src":"assets/linux-console.gif","caption":"Automated patch run"},
+          {"type":"pdf","src":"assets/case-linux.pdf","caption":"Case study: migration to Debian 11"},
+          {"type":"youtube","src":"https://www.youtube.com/embed/dQw4w9WgXcQ","caption":"Talk: Linux Ops at Scale"}
+        ]
+      },
+      {
+        "id":"cloud",
+        "title":"Cloud Administration",
+        "subtitle":"AWS driven IaaS/PaaS operations and cost management",
+        "summary":["Design & operate AWS accounts","IaC with Terraform","Cost optimization & tagging"],
+        "tags":["AWS","EC2","S3","VPC","Terraform","CloudWatch","IAM"],
+        "media":[
+          {"type":"image","src":"assets/aws-architecture.png","caption":"Well-architected landing zone"},
+          {"type":"youtube","src":"https://www.youtube.com/embed/ysz5S6PUM-U","caption":"Demo: Terraform modules"}
+        ]
+      },
+      {
+        "id":"sre",
+        "title":"Site Reliability Engineering",
+        "subtitle":"SLO/SLI/Incident response and automation",
+        "summary":["SLO design and tracking","Incident playbooks and postmortems","Chaos experiments with Litmus"],
+        "tags":["SRE","SLO","Prometheus","Alerting","PagerDuty","Kubernetes","Chaos"],
+        "media":[{"type":"pdf","src":"assets/sre-postmortem.pdf","caption":"Postmortem example"}]
+      },
+      {
+        "id":"devops",
+        "title":"DevOps",
+        "subtitle":"CI/CD, pipelines and developer platforms",
+        "summary":["GitOps patterns","CI with GitHub Actions","Docker build pipelines"],
+        "tags":["CI/CD","GitHub Actions","Docker","Helm","ArgoCD"],
+        "media":[{"type":"youtube","src":"https://www.youtube.com/embed/oHg5SJYRHA0","caption":"Pipeline walkthrough"}]
+      },
+      {
+        "id":"db",
+        "title":"Database Administration",
+        "subtitle":"RDBMS & NoSQL operations, backups and tuning",
+        "summary":["MySQL tuning and HA","Postgres replication","MongoDB ops"],
+        "tags":["Postgres","MySQL","MongoDB","Backups","Replication","HA"],
+        "media":[{"type":"image","src":"assets/db-graph.png","caption":"Query optimization results"}]
+      },
+      {
+        "id":"arch",
+        "title":"System Architect",
+        "subtitle":"High-level design, scalability and cost trade-offs",
+        "summary":["Microservices vs Monolith decisions","Capacity planning","Security-by-design"],
+        "tags":["Architecture","Microservices","LoadBalancing","CDN","Caching"],
+        "media":[{"type":"pdf","src":"assets/arch-overview.pdf","caption":"Architecture overview"}]
+      },
+      {
+        "id":"pentest",
+        "title":"Penetration Testing / Ethical Hacking",
+        "subtitle":"Vulnerability assessments and red-team exercises",
+        "summary":["Network & web app pentests","OWASP Top 10","Secure config recommendations"],
+        "tags":["PenTest","Burp","nmap","Metasploit","OWASP"],
+        "media":[{"type":"image","src":"assets/security-scan.png","caption":"Scan report snapshot"}]
+      },
+      {
+        "id":"automation",
+        "title":"System Automation & Orchestration",
+        "subtitle":"Workflows, event-driven ops and runbooks",
+        "summary":["Event-driven automation with AWS Lambda","Orchestration with Ansible Tower","Self-healing scripts"],
+        "tags":["Automation","Lambda","Ansible","Runbooks","EventBridge"],
+        "media":[{"type":"youtube","src":"https://www.youtube.com/embed/3fumBcKC6RE","caption":"Automation demo"}]
+      },
+      {
+        "id":"oss",
+        "title":"Open Source Consulting",
+        "subtitle":"Adoption, contribution and community work",
+        "summary":["Open source licensing guidance","Maintainer collaboration","Contribution governance"],
+        "tags":["Open Source","Licensing","Community","Contributing"],
+        "media":[{"type":"pdf","src":"assets/oss-brief.pdf","caption":"Consulting brief"}]
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // Simple renderer that builds the sections from JSON.
+    const data = JSON.parse(document.getElementById('site-data').textContent);
+    document.getElementById('resumeLink').href = data.resume || '#';
+
+    const container = document.getElementById('sections');
+
+    // Build sections
+    data.sections.forEach(section=>{
+      const card = document.createElement('div');card.className='section-card';
+      const details = document.createElement('details'); if(section.open) details.open=true;
+      const summary = document.createElement('summary');
+      summary.innerHTML = `<div style="flex:1"><div class='section-title'>${section.title}</div><div class='meta'>${section.subtitle}</div></div><div style='text-align:right;color:var(--muted)'>${section.tags.join(', ')}</div>`;
+
+      const content = document.createElement('div');content.className='content-area';
+      // summary bullets
+      const ul = document.createElement('ul');
+      section.summary.forEach(s=>{const li=document.createElement('li');li.textContent=s;ul.appendChild(li)});
+      content.appendChild(ul);
+
+      // tags
+      const tagsWrap = document.createElement('div');tagsWrap.className='tags';
+      section.tags.forEach(t=>{const span=document.createElement('span');span.className='tag';span.textContent=t;span.dataset.tag=t;span.onclick=()=>filterByTag(t);tagsWrap.appendChild(span)});
+      content.appendChild(tagsWrap);
+
+      // media
+      if(section.media && section.media.length){
+        const mediaRow=document.createElement('div');mediaRow.className='media-row';
+        section.media.forEach(m=>{
+          const mdiv=document.createElement('div');mdiv.className='media';
+          if(m.type==='image'){
+            const img=document.createElement('img');img.src=m.src;img.alt=m.caption||section.title; mdiv.appendChild(img);
+            if(m.caption) {const c=document.createElement('div');c.className='caption';c.textContent=m.caption;mdiv.appendChild(c)}
+          } else if(m.type==='youtube'){
+            const ifr=document.createElement('iframe');ifr.width='100%';ifr.height='200';ifr.src=m.src;ifr.title=m.caption||'Video';ifr.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';ifr.allowFullscreen=true; mdiv.appendChild(ifr);
+            if(m.caption) {const c=document.createElement('div');c.className='caption';c.textContent=m.caption;mdiv.appendChild(c)}
+          } else if(m.type==='pdf'){
+            const a=document.createElement('a');a.href=m.src;a.className='pdf-link';a.target='_blank';a.textContent = m.caption || 'Open PDF'; mdiv.appendChild(a);
+          }
+          mediaRow.appendChild(mdiv);
+        })
+        content.appendChild(mediaRow);
+      }
+
+      details.appendChild(summary);
+      details.appendChild(content);
+      card.appendChild(details);
+      container.appendChild(card);
+    });
+
+    // Build global tag cloud with frequency
+    const tagCounts={};
+    data.sections.forEach(s=>s.tags.forEach(t=>tagCounts[t]=(tagCounts[t]||0)+1));
+    const tagsEl=document.getElementById('globalTags');
+    Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).forEach(([tag,count])=>{
+      const el=document.createElement('div');el.className='tag';el.textContent=tag;el.dataset.size = count;el.onclick=()=>filterByTag(tag);
+      // scale factor
+      const size = Math.min(10, count);
+      el.style.setProperty('--size', size);
+      tagsEl.appendChild(el);
+    });
+
+    // Search
+    const searchInput=document.getElementById('searchInput');
+    searchInput.addEventListener('input',()=>{
+      const q = searchInput.value.trim().toLowerCase();
+      filter(q);
+    });
+    document.getElementById('clearBtn').addEventListener('click',()=>{searchInput.value='';filter('')});
+
+    document.getElementById('expandAll').addEventListener('click',()=>{
+      const details=document.querySelectorAll('details');
+      const allOpen = Array.from(details).every(d=>d.open);
+      details.forEach(d=>d.open = !allOpen);
+      document.getElementById('expandAll').textContent = allOpen? 'Expand all' : 'Collapse all';
+    })
+
+    function filter(q){
+      const cards = document.querySelectorAll('.section-card');
+      cards.forEach(card=>{
+        const text = card.textContent.toLowerCase();
+        card.style.display = (q==='' || text.includes(q)) ? 'block' : 'none';
+      })
+    }
+
+    function filterByTag(tag){
+      searchInput.value = tag; filter(tag.toLowerCase());
+      // visually highlight matching tags
+      document.querySelectorAll('.tag').forEach(t=>t.style.boxShadow='');
+      document.querySelectorAll('[data-tag]').forEach(el=>{ if(el.dataset.tag===tag) el.style.boxShadow='0 6px 12px rgba(255,153,0,0.12)'});
+    }
+
+    // Accessibility: allow keyboard toggle on summaries
+    document.querySelectorAll('summary').forEach(s=>{s.addEventListener('keydown',e=>{ if(e.key==='Enter' || e.key===' ') s.parentElement.open = !s.parentElement.open})});
+
+    // Small enhancement: add anchor links for each section
+    document.querySelectorAll('.section-card').forEach((card,i)=>{
+      const id = data.sections[i].id || 'sec'+i; card.id = id;
+    })
+
+    // Optional: analytics placeholder
+    // console.log('Site data loaded for', data.name);
+  </script>
+</body>
+</html>
